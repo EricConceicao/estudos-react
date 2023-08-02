@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 
-// Componente do Formulário para adicionar taréfas.
+// Componente do Formulário para adicionar tarefas.
 function Form(props) {
 	
 	const [name, setName] = useState('');
@@ -13,7 +13,7 @@ function Form(props) {
 			props.onSubmit(name);
 			setName('');
 		} else {
-			alert('Insira um nome para à taréfa antes de submeter');
+			alert('Insira um nome para à tarefa antes de submeter');
 		}
 	}
 

@@ -1,38 +1,41 @@
+// Bibliotecas //
 import React, {useState} from 'react';
 
-// Componente do item da lista de coisas a fazer.
 
+// Componente do item da lista de coisas afazer.
 function Todo(props) {
 
+  // Hooks // 
+
+  // alterna o modo de edição e o padrão com true e false.
   const [isEditing, setEditing] = useState(false);
+  
+  // Alterna o nome da tarefa após a edição
+  const [newName, setNewName] = useState('');
 
-  const editingTemplate = (
-    <form className="stack-small">
-      <div className="form-group">
 
-        <label className="todo-label" htmlFor={props.id}>
-          Novo nome para: {props.name}
-        </label>
+  // Funções //
 
-        <input id={props.id} className="todo-text" type="text" />
-      </div>
+  // Pega o que o usuário escreve como novo nome na edição.
+  function handleChange(e) {
+    setNewName(e.target.value);
+  }
 
-      <div className="btn-group">
-        <button type="button" className="btn todo-cancel">
-          Cancelar
-          <span className="visually-hidden">Edição: {props.name}</span>
-        </button>
+  // Cuida do submit para fazer a edição
+  function handleSubmit(e) {
+    e.preventDefault();
+    
+    props.editTask(props.id, newName)
+    setNewName('');
+    setEditing(false);
+  } 
 
-        <button type="submit" className="btn btn__primary todo-edit">
-          Salvar
-          <span className="visually-hidden">Novo nome para: {props.name}</span>
-        </button>
-      </div>
-    </form>
-  );
 
+  // Templates //
+
+  // View padrão das tarefas
   const viewTemplate = (
-		<div className="stack-small">
+    <div className="stack-small">
       <div className="c-cb">
         <input 
           id={props.id} 
@@ -47,7 +50,7 @@ function Todo(props) {
       </div>
 
       <div className="btn-group">
-        <button type="button" className="btn" onClick={props.editTask(props.id)}>
+        <button type="button" className="btn" onClick={() => setEditing(true)}>
           Editar 
           <span className="visually-hidden">{props.name}</span>
         </button>
@@ -61,9 +64,44 @@ function Todo(props) {
         </button>
       </div>
     </div>
-  )
+  );
 
-  // Se estiver editando, ele retonar o template de edição. Do contrário, o padrão.
+  // View de edição de tarefas
+  const editingTemplate = (
+    <form className="stack-small" onSubmit={handleSubmit}>
+      <div className="form-group">
+
+        <label className="todo-label" htmlFor={props.id}>
+          Novo nome para tarefa: <strong>{props.name}</strong>
+        </label>
+
+        <input 
+        id={props.id} 
+        className="todo-text" 
+        type="text"
+        value={newName}
+        onChange={handleChange}
+        autoComplete="off"/>
+      </div>
+
+      <div className="btn-group">
+        <button 
+        type="button" 
+        className="btn todo-cancel" 
+        onClick={() => setEditing(false)}>
+          Cancelar
+          <span className="visually-hidden">Edição da tarefa: {props.name}</span>
+        </button>
+
+        <button type="submit" className="btn btn__primary todo-edit">
+          Salvar
+          <span className="visually-hidden">Novo nome para tarefa: {props.name}</span>
+        </button>
+      </div>
+    </form>
+  );
+
+  // Se estiver editando, ele retorna o template de edição. Do contrário, o padrão.
   return <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>;
 }
 
