@@ -4,24 +4,23 @@ import CalcButton from './components/CalcButton.jsx';
 
 function App() {
 
-  const [valor, setValor] = useState('0');
-  const [result, setResult] = useState('0');
+  const [values, setValues] = useState('0');
+  const [result, setResult] = useState(0);
 
   // Mostra o que você apertou no painel, e vai adicionando a frente
-  function showOnPanel (buttonValue) {
-    if (valor === '0' && valor.length === 1) {
+  function showOnPanel (value) {
+    if (values === '0' && values.length === 1) {
 
-      setValor(buttonValue);
+      setValues(value);
     } else {
-
-      setValor(valor + buttonValue.toString());
-      
+ 
+      setValues(values + value);
     }
+    
   }
 
-  function showResult(total) {
-    console.log(total);
-    setResult(total);
+  function showResult (result) {
+    setResult(result);
   }
   
   return (
@@ -29,13 +28,11 @@ function App() {
       
       <h1>Calculadora</h1>
 
-      <h3>{valor}</h3>
+      <h3>{values}</h3>
       <h4>{result}</h4>
       
       
-      <CalcButton 
-      showOnPanel={showOnPanel}
-      showResult={showResult}/>
+      <CalcButton showOnPanel={showOnPanel} showResult={showResult} />
 
     </div>
   );
