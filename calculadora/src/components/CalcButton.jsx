@@ -1,13 +1,8 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 
 function CalcButton(props) {
 
-	const [result, setResult] = useState(0);
-	const [values, setValues] = useState('');
 
-	const clear = '';
-
-	let sum = 0;
 	// Dicionário para definir os valores dos botões que serão iterados depois
 	const BUTTON_VALUES = [
 		{ label: '1', value: 1 },
@@ -20,40 +15,38 @@ function CalcButton(props) {
 		{ label: '8', value: 8 },
 		{ label: '9', value: 9 },
 		{ label: '0', value: 0 },
-
-		{ label: '+', value: ' + ' },
-		{ label: '=', value: ' = ' }
 	];
 
-	function calc(operation) {
+	const OPERATION_VALUES = [
+		{ label: '+', value: () => sum() },
+		{ label: '-', value: () => minus() },
+		{ label: '=', value: () => equal() },
+		{ label: 'c', value: () => clear() }
+	];
 
-		switch (operation) {
-		case (' + '):
-			sum + parseInt(values);
-			console.log(sum)
-			break;
-
-		case (' = '):
-			setResult(sum);
-			break;
-
-		default:
-			
-			
-			break;
-		}
-		props.showOnPanel(values + operation);
-		props.showResult(result);
-		
-	}
+	
 
 
 	// Processo para iterar o vetor buttonValue com o método .map()
 	const Buttons = BUTTON_VALUES.map((button) => {
 	  	const buttons = (
 		  	<button 
+		  	id="calc-button"
 		  	key={button.label} 
-		  	onClick={() => { calc(button.value) }}
+		  	onClick={() => {props.onClick(button.value)}}
+		  	className="col-sm-3 btn-lg btn-secondary">
+		  		{button.label}
+		  	</button>
+		  );
+	  	return buttons
+  	});
+
+  	const Ops = OPERATION_VALUES.map((button) => {
+	  	const buttons = (
+		  	<button 
+		  	id="calc-button"
+		  	key={button.label} 
+		  	onClick={() => {props.onClick(button.value)}}
 		  	className="btn-lg btn-secondary">
 		  		{button.label}
 		  	</button>
@@ -61,10 +54,21 @@ function CalcButton(props) {
 	  	return buttons
   	});
 
+
   	// Layout que será renderizado //
 	return (
-		<div>
-			{Buttons}
+		<div className="row">
+			<div className="col-sm-5">
+				<div className="row">
+					{Buttons}
+				</div>
+			</div>
+
+	        <div className="col-sm-1">
+	        	<div className="row">
+	        		{Ops}
+	       		</div>
+	       	</div>
         </div>
 	);
 }
