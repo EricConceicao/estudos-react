@@ -1,8 +1,10 @@
 import { useState } from 'react';
 
 import CalcButton from './components/CalcButton.jsx';
+import CalcList from './components/CalcList.jsx';
 
 function App() {
+
   // Array de strings com entradas do usuário, e base para às operações.
   const [panelValue, setPanelValue] = useState('0');
 
@@ -18,6 +20,7 @@ function App() {
   // Função que pega à entrada do usuário como argumento, e à exibe no painel. E caso o valor seja umas das operações
   // ele irá alternar o controller para à chamada do handleOperation().
   function operation(number) {
+
     //Ternário para evitar que a primeira entrada fique como (01) e sim (1) atribuindo o número, ao invés de somar à string.
     const newPanelValue = panelValue === '0' ? number.toString() : panelValue + number.toString(); 
     setPanelValue(newPanelValue);
@@ -56,7 +59,7 @@ function App() {
       case '=':
         newTotal = handleOperation(newController, newTotal, calcValues);
         calcValues[counter + 2] = newTotal[counter];
-        console.log(`Total: ${newTotal[counter]} Conta: ${calcValues}`);
+        addToList(calcValues);
 
       case 'c':
         setPanelValue('0');
@@ -118,6 +121,10 @@ function App() {
     }
     return newTotal;
   }
+
+  function addToList() {
+
+  }
   
   return (
     <div className="container-fluid">
@@ -126,16 +133,16 @@ function App() {
       </header>
       
       <main className="container" id="calc-container">
-      
         <h2>{panelValue}</h2>
-        <h2><small>{typeof total[counter] === 'undefined' ? total[counter -2] : total[counter]}</small></h2>
+        <h2>
+          <small>
+            {typeof total[counter] === 'undefined' ? total[counter -2] : total[counter]}
+          </small>
+        </h2>
              
         <CalcButton onClick={operation} />
-     
-        <ul className="list-unstyled">
-          <h2>Lista de cálculos</h2>
-          <li>a</li>
-        </ul>
+
+        <CalcList addToList={addToList}/>
         
       </main>
     </div>
