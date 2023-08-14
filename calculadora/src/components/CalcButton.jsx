@@ -18,16 +18,18 @@ function CalcButton(props) {
 	];
 
 	const OPERATION_VALUES = [
-		{ label: '+', value: () => sum() },
-		{ label: '-', value: () => minus() },
-		{ label: '=', value: () => equal() },
-		{ label: 'c', value: () => clear() }
+		{ label: '+', value: ' + ' },
+		{ label: '-', value: ' - ' },
+		{ label: 'x', value: ' x ' },
+		{ label: '÷', value: ' ÷ ' },
+		{ label: '=', value: ' = ' },
+		{ label: 'c', value: ' c ' }
 	];
 
 	
 
 
-	// Processo para iterar o vetor buttonValue com o método .map()
+	// Processo para iterar o vetor buttonValue com o método .map() retornando os números de [0-9].
 	const Buttons = BUTTON_VALUES.map((button) => {
 	  	const buttons = (
 		  	<button 
@@ -41,6 +43,7 @@ function CalcButton(props) {
 	  	return buttons
   	});
 
+	// Processo para iterar o vetor buttonValue com o método .map() retornando os operandos.
   	const Ops = OPERATION_VALUES.map((button) => {
 	  	const buttons = (
 		  	<button 
