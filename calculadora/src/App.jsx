@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { nanoid } from 'nanoid';
 
 import CalcButton from './components/CalcButton.jsx';
 import CalcList from './components/CalcList.jsx';
@@ -16,6 +17,8 @@ function App() {
 
   // Usado como uma "memória". soma[1], subtração[2], multiplicação[3], divisão[4].
   const [controller, setController] = useState(0);
+
+  const [listItems, setListItems] = useState([]);
 
   // Função que pega à entrada do usuário como argumento, e à exibe no painel. E caso o valor seja umas das operações
   // ele irá alternar o controller para à chamada do handleOperation().
@@ -53,13 +56,12 @@ function App() {
       case '÷':
         newController = 4;
         setCounter(counter + 2);
-
         break;
 
+      // Este case não tem 'break' para que ocorra um 'clear' da calculadora depois disso.
       case '=':
         newTotal = handleOperation(newController, newTotal, calcValues);
-        calcValues[counter + 2] = newTotal[counter];
-        addToList(calcValues);
+        addToList(calcValues, newTotal[counter]);
 
       case 'c':
         setPanelValue('0');
@@ -92,58 +94,90 @@ function App() {
     switch(newController) {
 
       case 1:
-        calc1 = parseInt(newTotal[counter - 2]);
-        calc2 = parseInt(calcValues[counter]);
+        calc1 = parseFloat(newTotal[counter - 2]);
+        calc2 = parseFloat(calcValues[counter]);
         newTotal[counter] = calc1 + calc2;
         break;
 
       case 2:
-        calc1 = parseInt(newTotal[counter - 2]);
-        calc2 = parseInt(calcValues[counter]);
+        calc1 = parseFloat(newTotal[counter - 2]);
+        calc2 = parseFloat(calcValues[counter]);
         newTotal[counter] = calc1 - calc2;
         break;
 
       case 3:
-        calc1 = parseInt(newTotal[counter - 2]);
-        calc2 = parseInt(calcValues[counter]);
+        calc1 = parseFloat(newTotal[counter - 2]);
+        calc2 = parseFloat(calcValues[counter]);
         newTotal[counter] = calc1 * calc2;
         break;
 
       case 4:
-        calc1 = parseInt(newTotal[counter - 2]);
-        calc2 = parseInt(calcValues[counter]);
+        calc1 = parseFloat(newTotal[counter - 2]);
+        calc2 = parseFloat(calcValues[counter]);
         newTotal[counter] = calc1 / calc2;
         break;
 
       default:
-        newTotal[counter] = parseInt(calcValues[counter]); 
+        newTotal[counter] = parseFloat(calcValues[counter]); 
         break;
     }
     return newTotal;
   }
 
-  function addToList() {
+  // Formata a operação para ser mostrada em uma lista.
+  function addToList(calcValues, total) {
+    let formated = ''
 
+    calcValues.map(index => {
+      formated += ' ' + index;
+    });
+    const item = { key: nanoid(), expression: formated, result: total.toString() }
+
+    setListItems([...listItems, item]); 
+    console.log(listItems);
   }
-  
+
+  // Iteração para criar os items de lista com os resultados salvo.
+  const calcList =listItems.map(item => {
+    const calcList = (
+        <CalcList
+          key={item.key}
+          expression={item.expression}
+          result={item.result} />
+      );
+
+    return calcList
+  });
+
+
+  /// Layout ///
   return (
     <div className="container-fluid">
       <header>
         <h1 className="display-1">Caluladorinha <small>3000</small></h1>
       </header>
       
-      <main className="container" id="calc-container">
-        <h2>{panelValue}</h2>
-        <h2>
-          <small>
-            {typeof total[counter] === 'undefined' ? total[counter -2] : total[counter]}
-          </small>
-        </h2>
-             
-        <CalcButton onClick={operation} />
+      <main className="container p-4 border rounded" id="calc-container">
+        <div className="row">
+          <div className="col-sm-7">
+            <h2 className="bg-info rounded p-1">{panelValue}</h2>
 
-        <CalcList addToList={addToList}/>
-        
+            <h2 className="bg-info rounded p-1 h2">
+              <small>
+                Total: {typeof total[counter] === 'undefined' ? total[counter -2] : total[counter]}
+              </small>
+            </h2>
+                  
+            <CalcButton onClick={operation} />
+          </div>
+
+          <div className="col-sm-5">
+            <ul id="calc-list" className='list-unstyled list-group'>
+              {calcList}
+            </ul>
+          </div>
+          
+        </div>
       </main>
     </div>
   );
