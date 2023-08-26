@@ -131,19 +131,47 @@ function App() {
     calcValues.map(index => {
       formated += ' ' + index;
     });
-    const item = { key: nanoid(), expression: formated, result: total.toString() }
+
+    const item = {
+      name: 'Seu calcúlo', 
+      expression: formated, 
+      result: total.toString(),
+      id: nanoid() 
+    };
 
     setListItems([...listItems, item]); 
-    console.log(listItems);
+  }
+  // Edita o título de um item usando sua id, e texto que o usuário inseriu
+  function editName(id, newName) {
+    const editedItem = listItems.map(item => {
+
+      if (item.id === id) {
+        return { ...item, name: newName };
+      }
+
+      return item
+    });
+    setListItems(editedItem);
+  }
+
+  // Deleta um item pela sua id, filtrando o array dos item.
+  function deleteItem(id) {
+    const remainingItems = listItems.filter(item => item.id !== id);
+ 
+    setListItems(remainingItems);
   }
 
   // Iteração para criar os items de lista com os resultados salvo.
   const calcList =listItems.map(item => {
     const calcList = (
         <CalcList
-          key={item.key}
+          key={item.id}
+          id={item.id}
+          name={item.name}
           expression={item.expression}
-          result={item.result} />
+          result={item.result} 
+          editName={editName} 
+          deleteItem={deleteItem}/>
       );
 
     return calcList
@@ -157,7 +185,7 @@ function App() {
         <h1 className="display-1">Caluladorinha <small>3000</small></h1>
       </header>
       
-      <main className="container p-4 border rounded" id="calc-container">
+      <main className="container p-4 border border-1 border-dark rounded" id="calc-container">
         <div className="row">
           <div className="col-sm-7">
             <h2 className="bg-info rounded p-1">{panelValue}</h2>
