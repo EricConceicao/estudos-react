@@ -1,7 +1,10 @@
-# Meus mini projetinhos para estudar React.js
+# Mini-projects to study React.js
 
-## Lista de tarefas (afazer-2000)
-É uma lista de tarefas que permite adicionar, marcar como feito, editar, filtrar e excluir as tarefas
+## Todo list 
+A simple todo list to study react hooks, props, callback props and components creating a basic CRUD. 
 
-## Calculadora
-Uma calculadora de botões que funciona de forma similar à de um celular, só que para operações mais simples. E também, salva seu resultado em uma lista
+## Simple Calculator
+Uma calculadora de botões que funciona de forma similar à de um celular, só que para operações mais simples. E também, salva seu resultado em uma lista.
+
+## Testing Fetch with PokeApi
+Fetching pokémon data using fetch function and trying out some Boostrap 5 classes.
