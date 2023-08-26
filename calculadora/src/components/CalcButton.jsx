@@ -15,6 +15,7 @@ function CalcButton(props) {
 		{ label: '8', value: 8 },
 		{ label: '9', value: 9 },
 		{ label: '0', value: 0 },
+		{ label: '.', value: '.'}
 	];
 
 	const OPERATION_VALUES = [
@@ -33,10 +34,10 @@ function CalcButton(props) {
 	const Buttons = BUTTON_VALUES.map((button) => {
 	  	const buttons = (
 		  	<button 
-		  	id="calc-button"
+		  	id="calc-buttons"
 		  	key={button.label} 
 		  	onClick={() => {props.onClick(button.value)}}
-		  	className="col-sm-3 btn-lg btn-secondary">
+		  	className="col btn-lg btn-secondary m-1">
 		  		{button.label}
 		  	</button>
 		  );
@@ -47,10 +48,10 @@ function CalcButton(props) {
   	const Ops = OPERATION_VALUES.map((button) => {
 	  	const buttons = (
 		  	<button 
-		  	id="calc-button"
+		  	id="calc-buttons"
 		  	key={button.label} 
 		  	onClick={() => {props.onClick(button.value)}}
-		  	className="btn-lg btn-secondary">
+		  	className="btn-lg btn-white m-1">
 		  		{button.label}
 		  	</button>
 		  );
@@ -60,17 +61,13 @@ function CalcButton(props) {
 
   	// Layout que será renderizado //
 	return (
-		<div className="row">
-			<div className="col-sm-5">
-				<div className="row">
-					{Buttons}
-				</div>
+		<div id="calc-buttons-container" className="row m-2 border p-2 ">
+			<div className="col-sm-7">
+				{Buttons}
 			</div>
 
-	        <div className="col-sm-1">
-	        	<div className="row">
-	        		{Ops}
-	       		</div>
+	        <div className="col-sm">
+	        	{Ops}
 	       	</div>
         </div>
 	);
