@@ -36,7 +36,7 @@ function Pokemon() {
                 <input className="w-25 p-1 text-center border-0 border-bottom border-dark bg-info" type="text" onChange={(e) => setName(e.target.value)} placeholder="ditto..."/>
                 <button className="btn btn-outline-danger border-3 mx-1" type="submit">Pesquisar</button>
             </form>
-            <div className="Pokemon container">
+            <div className="Pokemon container anim">
                 
                 {Object.keys(data).length > 0 &&
                     <>
