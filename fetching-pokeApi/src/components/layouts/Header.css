@@ -1,0 +1,19 @@
+header {
+	padding: .4em .2em;
+	text-align: center;
+}
+
+nav {
+	justify-content: center;
+}
+
+.nav-link {
+	color: white;
+}
+
+nav a.active {
+	color: black;
+	border: inset .12em #ddd;
+	background-color: #eee;
+	border-radius: 25px;
+}

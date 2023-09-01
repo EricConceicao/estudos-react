@@ -1,13 +1,16 @@
 // Library imports
 import {useState} from 'react';
 
-import './Pokemon.css';
+// Component imports
+import Header from '../layouts/Header.jsx';
+import Figure from '../layouts/Figure.jsx';
 
 function Pokemon() {
 
     const [name, setName] = useState('');
     const [data, setData] = useState({});
 
+    // Function for fetching pokeAPI data
     async function fetchPokemon(e) {
         e.preventDefault();
 
@@ -23,30 +26,26 @@ function Pokemon() {
     }
 
     return (
-        <>
-            <header className="text-center bg-danger p-2">
-               <h1 className="display-1">Mini Pokédex</h1> 
-            </header>
+        <>  
+            <Header>
+                <h1 className="display-1">Mini Pokédex</h1> 
+            </Header>
             
-            <form className="container-fluid bg-info p-1" onSubmit={fetchPokemon}>
+            <form className="container-fluid text-center bg-info p-1" onSubmit={fetchPokemon}>
                 <legend>Type the name of the pokémon that you want to search</legend>
-                <input className="p-1 rounded" type="text" onChange={(e) => setName(e.target.value)} placeholder="ditto..."/>
+                <input className="w-25 p-1 text-center border-0 border-bottom border-dark bg-info" type="text" onChange={(e) => setName(e.target.value)} placeholder="ditto..."/>
                 <button className="btn btn-outline-danger border-3 mx-1" type="submit">Pesquisar</button>
             </form>
             <div className="Pokemon container">
                 
-                
-
                 {Object.keys(data).length > 0 &&
                     <>
                         <div style={{backgroundColor: '#ddd'}} className="p-3 my-3 border-bottom border-2 border-dark rounded-3">
-                            <figure className="border border-2 border-dark rounded-3 bg-info p-2 my-2 d-flex align-items-center gap-1">
-                                <img className="bg-white " src={data.sprites.front_default} alt={`Image of ${data.name}`} />
-                                <figcaption className="display-6">{data?.name}</figcaption>
-                            </figure>
-                                
-                            <h2>{data.types?.map(poke => poke.type.name + ' ')}</h2>
+                            <Figure
+                            imgSrc={data.sprites.front_default}
+                            imgName={data.name} />
 
+                            <h2 style={{textTransform: "capitalize"}}>{data.types?.map(poke => poke.type.name + ' ')}</h2>
                             <p>{data.pokedexEntry?.flavor_text}</p>
                         </div>
 
