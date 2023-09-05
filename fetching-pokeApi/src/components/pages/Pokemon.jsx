@@ -3,8 +3,12 @@ import {useState} from 'react';
 
 // Component imports
 import Header from '../layouts/Header.jsx';
+import Search from '../layouts/Search.jsx'; 
 import Figure from '../layouts/Figure.jsx';
+import Navigation from '../layouts/Navigation.jsx';
 
+
+// Fetching function for obtaining pokeAPI data
 function Pokemon() {
 
     const [name, setName] = useState('');
@@ -20,8 +24,16 @@ function Pokemon() {
 
         const dexData = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokeData.id}`);
         const {flavor_text_entries} = await dexData.json()
-        
-        const pokedexEntry = flavor_text_entries[0];
+
+        // A filter to obtain only pokedex entries in english
+        const description = flavor_text_entries.filter(text => {
+            if (text.language.name === 'en') {
+               return text 
+            } 
+        });
+        // To pick the most newer entry to use
+        const pokedexEntry = description[description.length - 1];
+
         setData({...pokeData, pokedexEntry});
     }
 
@@ -30,12 +42,17 @@ function Pokemon() {
             <Header>
                 <h1 className="display-1">Mini Pokédex</h1> 
             </Header>
+
+            <Navigation />
             
-            <form className="container-fluid text-center bg-info p-1" onSubmit={fetchPokemon}>
-                <legend>Type the name of the pokémon that you want to search</legend>
-                <input className="w-25 p-1 text-center border-0 border-bottom border-dark bg-info" type="text" onChange={(e) => setName(e.target.value)} placeholder="ditto..."/>
-                <button className="btn btn-outline-danger border-3 mx-1" type="submit">Pesquisar</button>
-            </form>
+            <Search 
+                type="text" 
+                label="Type the name of the pokémon that you want to search" 
+                onChange={setName} 
+                pHolder="ditto..."
+                bText="Search" 
+                onSubmit={fetchPokemon} />
+
             <div className="Pokemon container">
                 
                 {Object.keys(data).length > 0 &&

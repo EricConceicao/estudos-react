@@ -1,0 +1,14 @@
+.Home img {
+	width: 16em;
+}
+
+.Home a {
+	color: #fff;
+	text-decoration: underline .1rem #fff;
+}
+
+.Home a:hover,
+.Home a:focus {
+	color: #000;
+	text-decoration: none;
+}
