@@ -1,0 +1,10 @@
+@keyframes smooth {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.anim {
+    opacity: 0;
+    transition: 1s;
+    animation: smooth 3s ease-in-out 4s 1 forwards;
+}

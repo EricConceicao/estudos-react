@@ -7,8 +7,8 @@ import Search from '../layouts/Search.jsx';
 import Figure from '../layouts/Figure.jsx';
 import Navigation from '../layouts/Navigation.jsx';
 
-
 // Fetching function for obtaining pokeAPI data
+
 function Pokemon() {
 
     const [name, setName] = useState('');
@@ -44,7 +44,7 @@ function Pokemon() {
             </Header>
 
             <Navigation />
-            
+
             <Search 
                 type="text" 
                 label="Type the name of the pokémon that you want to search" 
