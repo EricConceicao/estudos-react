@@ -1,0 +1,23 @@
+nav {
+	justify-content: center;
+}
+
+.nav-link {
+	color: white;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+	color: #ccf;
+}
+
+nav a.active {
+	color: black;
+	border: inset .12em #ddd;
+	background-color: #eee;
+	border-radius: 25px;
+}
+
+nav a.active:hover {
+	color: #000;
+}
