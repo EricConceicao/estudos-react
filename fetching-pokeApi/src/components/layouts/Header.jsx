@@ -1,10 +1,6 @@
-import {NavLink} from 'react-router-dom';
-
-import './Header.css';
-
 function Header({children}) {
 	return (
-		<header className="bg-danger">
+		<header className="bg-danger text-center py-4 px-2">
 			{children}
 		</header>
 	);

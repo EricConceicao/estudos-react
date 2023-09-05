@@ -16,7 +16,7 @@ function Berry() {
 
         const data = await fetch(`https://pokeapi.co/api/v2/berry/${name}`);
         setBerryData(await data.json());
-        console.log(berryData)
+        console.log(berryData);
     }
 
     return (
@@ -27,11 +27,10 @@ function Berry() {
 
             <Navigation />  
 
-            <Search 
-                type="text" 
+            <Search  
                 label="Type the name of the berry that you want to search" 
                 onChange={setName} 
-                pHolder="leppa"
+                pHolder="leppa..."
                 bText="Search" 
                 onSubmit={fetchBerry} />
 
