@@ -1,3 +1,5 @@
+// Don't forget to use e.preventDefault() on the function that the form calls.
+
 function Search(props) {
 	return (
 		<>	
