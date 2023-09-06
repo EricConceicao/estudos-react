@@ -37,13 +37,14 @@ function Berry() {
             {Object.keys(berryData).length > 0 &&
                 <div className="Berry container">
                     <h1>{berryData.item.name}</h1>
-                    <h2>Berry Firmness: <small>{berryData.firmness.name}</small></h2>
-
-                    <table className="table table-primary table-striped table-bordered border-white table-responsive rounded">
+                    
+                    
+                    <h2>Flavor table</h2>
+                    <table className="table table-primary table-striped table-bordered border-white rounded">
                         <thead className="table-secondary">
                             <tr>
-                                <th>Flavor</th>
-                                <th>Potency</th>
+                                <th scope="col">Flavor</th>
+                                <th scope="col">Potency</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,6 +70,32 @@ function Berry() {
                             </tr>
                         </tbody>
                     </table>
+
+                    <h2>Berry details</h2>
+                    <div className="table-responsive text-nowrap">
+                        <table className="table table-primary table-striped table-bordered border-white rounded text-center">
+                            <thead className="table-secondary">
+                                <tr>
+                                    <th scope="col">Growth Time</th>
+                                    <th scope="col">Max Harvest</th>
+                                    <th scope="col">Soil Dryness</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col">Smoothness</th>
+                                    <th scope="col">Berry Firmness</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{berryData.growth_time}</td>
+                                    <td>{berryData.max_harvest}</td>
+                                    <td>{berryData.soil_dryness}</td>
+                                    <td>{berryData.size}</td>
+                                    <td>{berryData.smoothness}</td>
+                                    <td>{berryData.firmness.name}</td>
+                                </tr>
+                            </tbody>
+                        </table> 
+                    </div>
                 </div>
             }
         </>
