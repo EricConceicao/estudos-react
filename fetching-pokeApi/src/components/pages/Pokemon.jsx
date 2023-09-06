@@ -54,7 +54,6 @@ function Pokemon() {
                 onSubmit={fetchPokemon} />
 
             <div className="Pokemon container">
-                
                 {Object.keys(data).length > 0 &&
                     <>
                         <div style={{backgroundColor: '#ddd'}} className="p-3 my-3 border-bottom border-2 border-dark rounded-3">
@@ -62,12 +61,12 @@ function Pokemon() {
                             imgSrc={data.sprites.front_default}
                             imgName={data.name} />
 
-                            <h2 style={{textTransform: "capitalize"}}>{data.types?.map(poke => poke.type.name + ' ')}</h2>
-                            <p>{data.pokedexEntry?.flavor_text}</p>
+                            <h2 style={{textTransform: "capitalize"}}>{data.types.map(poke => poke.type.name + ' ')}</h2>
+                            <p>{data.pokedexEntry.flavor_text}</p>
                         </div>
 
                         <table className="table table-primary table-striped table-bordered border-white table-responsive rounded">
-                            <thead>
+                            <thead className="table-secondary">
                                 <tr>
                                     <th>Attribute</th>
                                     <th>Value</th>

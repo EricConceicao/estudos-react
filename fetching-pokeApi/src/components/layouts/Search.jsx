@@ -10,7 +10,7 @@ function Search(props) {
 					id="search"
 					type="text"
 					onChange={(e) => props.onChange(e.target.value)} 
-					placeHolder={props.pHolder} />
+					placeholder={props.pHolder} />
 				<button className="btn btn-outline-danger border-3 mx-1" type="submit">{props.bText}</button>
 			</form>
 		</>
